@@ -47,9 +47,24 @@ def _path_exists(owner: str, repo: str, path: str, timeout: float = 8.0) -> bool
     response.raise_for_status()
     return False
 
+def _verify_repository(owner: str, repo: str) -> None:
+    url = f"https://api.github.com/repos/{owner}/{repo}"
+    response = requests.get(
+        url,
+        timeout=8.0,
+        headers={"Accept": "application/vnd.github+json"},
+    )
+    if response.status_code == 404:
+        raise requests.HTTPError(
+            f"Repository not found or inaccessible: {owner}/{repo}",
+            response=response,
+        )
+    response.raise_for_status()
+
 
 def check_repository(owner: str, repo: str, checks: dict[str, Iterable[str]] | None = None) -> list[CheckResult]:
     """Run contribution-readiness checks against a public GitHub repository."""
+    _verify_repository(owner, repo)
     selected = checks or CHECKS
     results: list[CheckResult] = []
 
