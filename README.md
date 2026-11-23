@@ -36,7 +36,7 @@ oss-repo-check [owner/repo]
 ## 출력 예시
 
 ```text
-Repository: pallets/flask
+Repository: owner/repo
 README                 OK
 CONTRIBUTING            OK
 CODE_OF_CONDUCT         OK
