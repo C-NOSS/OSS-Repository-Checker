@@ -30,7 +30,7 @@ oss-repo-check https://github.com/[repo]
 또는 owner/repository 형식으로도 실행할 수 있습니다.
 
 ```bash
-oss-repo-check pallets/flask
+oss-repo-check [owner/repo]
 ```
 
 ## 출력 예시
